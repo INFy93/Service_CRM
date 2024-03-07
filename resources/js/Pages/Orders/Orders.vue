@@ -1,4 +1,7 @@
 <template>
+    <Head>
+        <title>Заказы</title>
+    </Head>
 <AppLayout>
     <Title>Заказы</Title>
     <div v-if="orders.data"
@@ -145,7 +148,7 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue"
 import Title from "../../Layouts/Elements/Title.vue";
-import {router } from "@inertiajs/vue3"
+import { router, Head } from "@inertiajs/vue3"
 import {ref, watch} from "vue";
 import useHelpers from "../../composables/helpers/helper.js";
 
@@ -154,7 +157,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid"
 export default {
     components: {
         DialogOverlay,
-        AppLayout, Title, Menu, MenuButton, MenuItem, MenuItems, ChevronDownIcon
+        AppLayout, Title, Menu, MenuButton, MenuItem, MenuItems, ChevronDownIcon, Head
     },
     props: {
         orders: Object
