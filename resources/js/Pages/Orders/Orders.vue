@@ -153,6 +153,7 @@
             </tr>
         </tbody>
     </table>
+
 </AppLayout>
 </template>
 
