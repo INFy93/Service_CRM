@@ -50,7 +50,34 @@
         <tbody>
             <tr class="transition-all number hover:bg-gray-200 duration-400" v-for="order in orders.data">
                 <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-20">{{order.service.service_code}}-{{ leadingZeros(order.id) }}</td>
-                <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-52">{{ order.status.name }} </td>
+                <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-52">
+                    <Menu as="div" class="relative inline-block text-left">
+                        <div>
+                            <MenuButton
+                                class="inline-flex items-center px-4 py-1 text-xs font-medium leading-5 text-white rounded-lg"
+                                :class="'bg-' + order.status.color">
+                                {{ order.status.name }}
+                                <ChevronDownIcon class="w-5 h-5 ml-2 -mr-1" aria-hidden="true" />
+                            </MenuButton>
+                        </div>
+                        <Transition enter-active-class="transition duration-100 ease-out"
+                                    enter-from-class="transform scale-95 opacity-0"
+                                    enter-to-class="transform scale-100 opacity-100"
+                                    leave-active-class="transition duration-75 ease-in"
+                                    leave-from-class="transform scale-100 opacity-100"
+                                    leave-to-class="transform scale-95 opacity-0">
+                            <MenuItems
+                                class="absolute left-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div class="px-1 py-1">
+                                    <MenuItem>
+                                        <a
+                                           class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Новый</a>
+                                    </MenuItem>
+                                </div>
+                            </MenuItems>
+                        </Transition>
+                    </Menu>
+                </td>
                 <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-52">
                     <div class="flex items-center">
                         <div>
@@ -89,10 +116,11 @@ import {router } from "@inertiajs/vue3"
 import {ref, watch} from "vue";
 import useHelpers from "../../composables/helpers/helper.js";
 
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue"
+import {DialogOverlay, Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/vue"
 import { ChevronDownIcon } from "@heroicons/vue/20/solid"
 export default {
     components: {
+        DialogOverlay,
         AppLayout, Title, Menu, MenuButton, MenuItem, MenuItems, ChevronDownIcon
     },
     props: {
