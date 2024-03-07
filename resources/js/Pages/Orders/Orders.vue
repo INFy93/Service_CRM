@@ -138,7 +138,18 @@
                 <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-52">{{ order.model }} </td>
                 <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-52">{{ order.product_complection }} </td>
                 <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-52">{{ order.malfunction }} </td>
-                <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-52">{{ order.client_login }} </td>
+                <td class="px-2 py-1 text-sm whitespace-no-wrap border-b border-gray-200 w-52">
+                    <div class="flex items-center">
+                        <div>
+                            <div class="text-sm font-medium leading-5 text-gray-700">
+                                {{ order.client_login }}
+                            </div>
+                            <div class="text-sm leading-5 text-gray-500">
+                                {{ nicePhone(order.client_phone) }}
+                            </div>
+                        </div>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -168,7 +179,7 @@ export default {
 
         const url = route('orders.index');
 
-        const { formatDate, leadingZeros, fromNow } = useHelpers();
+        const { formatDate, leadingZeros, fromNow, nicePhone } = useHelpers();
 
         watch(search, async () => {
             await router.get(url, {search: search.value}, {preserveState: true, preserveScroll: true, only: ['orders']} )
@@ -178,7 +189,8 @@ export default {
             search,
             formatDate,
             leadingZeros,
-            fromNow
+            fromNow,
+            nicePhone
         }
     }
 
