@@ -7,6 +7,8 @@ export default function useHelpers()
     dayjs.extend(localizedFormat);
     dayjs.extend(relativeTime);
     dayjs.locale(ru);
+
+    const currentUser = window.User;
     function formatDate(date, format="DD/MM/YYYY")
     {
         return dayjs(date).format(format)
@@ -21,9 +23,12 @@ export default function useHelpers()
         return value.toString().padStart(5, "0");
     }
 
+
+
     return {
         formatDate,
         leadingZeros,
-        fromNow
+        fromNow,
+        currentUser
     }
 }

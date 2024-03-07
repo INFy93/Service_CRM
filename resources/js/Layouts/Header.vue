@@ -8,7 +8,7 @@
         <div class="flex justify-between items-center h-14 bg-gray-200 header-right">
             <ul class="flex items-center text-gray-700 ml-auto">
                 <li>
-                    <Link :href="route('profile.edit')" class="hover:underline">KEK</Link>
+                    <Link :href="route('profile.edit')" class="hover:underline">{{ currentUser.name }}</Link>
                 </li>
                 <li>
                     <div class="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700"></div>
@@ -33,6 +33,7 @@
 
 <script>
 import { Link } from "@inertiajs/vue3"
+import useHelpers from "../composables/helpers/helper.js";
 export default {
     components: {
         Link
@@ -40,14 +41,14 @@ export default {
     setup()
     {
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-       // const { currentUser } = useUsers();
+       const { currentUser } = useHelpers();
         const logout = () => {
             document.getElementById('logout-form').submit();
         }
 
         return {
             token,
-           // currentUser,
+           currentUser,
             logout
         }
     }
