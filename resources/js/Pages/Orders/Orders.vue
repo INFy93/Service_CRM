@@ -121,7 +121,7 @@
                                 {{ order.user.name }}
                             </div>
                             <div class="text-sm leading-5 text-gray-500">
-                                {{ formatDate(order.created_at, 'LLL') }}
+                                {{ formatDate(order.created_at, 'LL LT') }}
                             </div>
                             <div class="flex flex-row space-x-1" v-if="order.status.status_id !== 6">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
