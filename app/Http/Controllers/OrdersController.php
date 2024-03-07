@@ -18,4 +18,15 @@ class OrdersController extends Controller
 
         return inertia('Orders/Orders', compact('orders'));
     }
+
+    public function changeStatus(Request $request)
+    {
+        $order = Order::find($request->order_id);
+
+        $order->status = $request->status;
+
+        $order->save();
+
+        return redirect()->back();
+    }
 }

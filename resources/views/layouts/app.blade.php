@@ -11,6 +11,7 @@
         window.User = {
             id: {{ optional(auth()->user())->id }},
             name: '{{ optional(auth()->user())->name }}',
+            service_id: '{{ optional(auth()->user())->service_id }}',
         }
     </script>
     @routes

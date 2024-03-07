@@ -73,40 +73,40 @@
                                 class="absolute left-0 z-10 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <div class="px-1 py-1">
                                     <MenuItem>
-                                        <a
+                                        <a @click="newStatus(order.id, 1, order.service.id)"
                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Новый</a>
                                     </MenuItem>
                                     <MenuItem>
-                                        <a
+                                        <a  @click="newStatus(order.id, 2, order.service.id)"
                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">В
                                             работе</a>
                                     </MenuItem>
                                 </div>
                                 <div class="px-1 py-1">
                                     <MenuItem>
-                                        <a
+                                        <a  @click="newStatus(order.id, 3, order.service.id)"
                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">На
                                             согласовании</a>
                                     </MenuItem>
                                     <MenuItem>
-                                        <a
+                                        <a  @click="newStatus(order.id, 4, order.service.id)"
                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Ждет
                                             запчасть</a>
                                     </MenuItem>
                                 </div>
                                 <div class="px-1 py-1">
                                     <MenuItem>
-                                        <a
+                                        <a  @click="newStatus(order.id, 5, order.service.id)"
                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Готов</a>
                                     </MenuItem>
                                     <MenuItem>
-                                        <a
+                                        <a  @click="newStatus(order.id, 6, order.service.id)"
                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Закрыт</a>
                                     </MenuItem>
                                 </div>
                                 <div class="px-1 py-1">
                                     <MenuItem>
-                                        <a
+                                        <a  @click="newStatus(order.id, 7, order.service.id)"
                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Отказ</a>
                                     </MenuItem>
                                 </div>
@@ -172,6 +172,7 @@ import { router, Head } from "@inertiajs/vue3";
 import { TailwindPagination } from 'laravel-vue-pagination';
 import {ref, watch} from "vue";
 import useHelpers from "../../composables/helpers/helper.js";
+import useOrders from "../../composables/orders/orders.js";
 
 import {DialogOverlay, Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/vue"
 import { ChevronDownIcon } from "@heroicons/vue/20/solid"
@@ -192,6 +193,7 @@ export default {
 
 
         const { formatDate, leadingZeros, fromNow, nicePhone } = useHelpers();
+        const { newStatus } = useOrders();
 
         watch(search, async () => {
             await router.get(url, {search: search.value}, {preserveState: true, preserveScroll: true, only: ['orders']} )
@@ -209,7 +211,8 @@ export default {
             leadingZeros,
             fromNow,
             paginate,
-            nicePhone
+            nicePhone,
+            newStatus
         }
     }
 

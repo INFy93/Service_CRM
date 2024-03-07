@@ -31,6 +31,7 @@ Route::get('/dashboard', function () {
 Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/orders',\App\Http\Controllers\OrdersController::class);
+    Route::put('/orders/status/update', [\App\Http\Controllers\OrdersController::class, 'changeStatus'])->name('orders.change-status');
 });
 
 Route::middleware('auth')->group(function () {
