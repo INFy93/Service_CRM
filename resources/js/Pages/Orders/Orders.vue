@@ -153,6 +153,14 @@
             </tr>
         </tbody>
     </table>
+    <div>
+        <TailwindPagination
+            :data="orders"
+            :limit="4"
+            @pagination-change-page="paginate"
+            class="mt-4"
+        />
+    </div>
 
 </AppLayout>
 </template>
@@ -160,7 +168,8 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue"
 import Title from "../../Layouts/Elements/Title.vue";
-import { router, Head } from "@inertiajs/vue3"
+import { router, Head } from "@inertiajs/vue3";
+import { TailwindPagination } from 'laravel-vue-pagination';
 import {ref, watch} from "vue";
 import useHelpers from "../../composables/helpers/helper.js";
 
@@ -169,7 +178,7 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid"
 export default {
     components: {
         DialogOverlay,
-        AppLayout, Title, Menu, MenuButton, MenuItem, MenuItems, ChevronDownIcon, Head
+        AppLayout, Title, Menu, MenuButton, MenuItem, MenuItems, ChevronDownIcon, Head, TailwindPagination
     },
     props: {
         orders: Object
@@ -178,7 +187,9 @@ export default {
     setup() {
         const search = ref('');
 
+
         const url = route('orders.index');
+
 
         const { formatDate, leadingZeros, fromNow, nicePhone } = useHelpers();
 
@@ -186,11 +197,18 @@ export default {
             await router.get(url, {search: search.value}, {preserveState: true, preserveScroll: true, only: ['orders']} )
         });
 
+        const paginate = async () =>
+        {
+            const page = ref(event.target.innerHTML);
+            await router.get(url, {page: page.value}, {preserveState: true, preserveScroll: true, only: ['orders']} )
+        }
+
         return {
             search,
             formatDate,
             leadingZeros,
             fromNow,
+            paginate,
             nicePhone
         }
     }
