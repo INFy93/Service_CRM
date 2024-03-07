@@ -73,6 +73,39 @@
                                         <a
                                            class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Новый</a>
                                     </MenuItem>
+                                    <MenuItem>
+                                        <a
+                                           class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">В
+                                            работе</a>
+                                    </MenuItem>
+                                </div>
+                                <div class="px-1 py-1">
+                                    <MenuItem>
+                                        <a
+                                           class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">На
+                                            согласовании</a>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <a
+                                           class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Ждет
+                                            запчасть</a>
+                                    </MenuItem>
+                                </div>
+                                <div class="px-1 py-1">
+                                    <MenuItem>
+                                        <a
+                                           class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Готов</a>
+                                    </MenuItem>
+                                    <MenuItem>
+                                        <a
+                                           class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Закрыт</a>
+                                    </MenuItem>
+                                </div>
+                                <div class="px-1 py-1">
+                                    <MenuItem>
+                                        <a
+                                           class="block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Отказ</a>
+                                    </MenuItem>
                                 </div>
                             </MenuItems>
                         </Transition>
