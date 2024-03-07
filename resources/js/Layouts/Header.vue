@@ -14,12 +14,15 @@
                     <div class="block w-px h-6 mx-3 bg-gray-400 dark:bg-gray-700"></div>
                 </li>
                 <li>
-                    <Link href="logout" class="flex items-center mr-4 hover:text-gray-600">
+                    <a href="/"  @click.prevent="logout" class="flex items-center mr-4 hover:text-gray-600">
             <span class="inline-flex mr-1">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
             </span>
                         Выйти
-                    </Link>
+                    </a>
+                    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+                        <input type="hidden" name="_token" :value="token">
+                    </form>
                 </li>
             </ul>
         </div>
@@ -33,6 +36,20 @@ import { Link } from "@inertiajs/vue3"
 export default {
     components: {
         Link
+    },
+    setup()
+    {
+        const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+       // const { currentUser } = useUsers();
+        const logout = () => {
+            document.getElementById('logout-form').submit();
+        }
+
+        return {
+            token,
+           // currentUser,
+            logout
+        }
     }
 }
 </script>
