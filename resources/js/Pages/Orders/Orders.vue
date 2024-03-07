@@ -88,9 +88,12 @@ import Title from "../../Layouts/Elements/Title.vue";
 import {router } from "@inertiajs/vue3"
 import {ref, watch} from "vue";
 import useHelpers from "../../composables/helpers/helper.js";
+
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue"
+import { ChevronDownIcon } from "@heroicons/vue/20/solid"
 export default {
     components: {
-        AppLayout, Title
+        AppLayout, Title, Menu, MenuButton, MenuItem, MenuItems, ChevronDownIcon
     },
     props: {
         orders: Object
