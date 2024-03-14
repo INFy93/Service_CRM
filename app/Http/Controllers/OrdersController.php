@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest;
 use App\Http\Resources\OrdersResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -21,6 +22,13 @@ class OrdersController extends Controller
 
     public function show(Order $order): OrdersResource
     {
+        return new OrdersResource($order);
+    }
+
+    public function store(OrderRequest $request): OrdersResource
+    {
+        $order = Order::create($request->validated());
+
         return new OrdersResource($order);
     }
 
