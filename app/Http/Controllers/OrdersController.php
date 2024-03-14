@@ -19,6 +19,11 @@ class OrdersController extends Controller
         return inertia('Orders/Orders', compact('orders'));
     }
 
+    public function show(Order $order): OrdersResource
+    {
+        return new OrdersResource($order);
+    }
+
     public function changeStatus(Request $request)
     {
         $order = Order::find($request->order_id);

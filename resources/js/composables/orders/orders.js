@@ -15,7 +15,12 @@ export default function useOrders() {
             }, {preserveState: true, preserveScroll: true, only: ['orders']} )
     }
 
+    const storeOrder = async () => {
+        return toast.success("Заказ успешно добавлен.");
+    }
+
     return {
-        newStatus
+        newStatus,
+        storeOrder
     }
 }

@@ -1,17 +1,17 @@
 import { ref } from "vue";
 export default function useDialogs() {
-    const isOpen = ref(false);
+    const isOpened = ref(false);
 
     function closeModal() {
-        return isOpen.value = false;
+        return isOpened.value = false;
     }
 
     function openModal() {
-        return isOpen.value = true;
+        return isOpened.value = true;
     }
 
     return {
-        isOpen,
+        isOpened,
         closeModal,
         openModal
     };

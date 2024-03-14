@@ -4,6 +4,32 @@
     </Head>
 <AppLayout>
     <Title>Заказы</Title>
+    <div class="flex flex-row items-center mt-2 mb-2">
+        <div>
+            <a class="flex flex-row space-x-3 update-button">
+                <button @click.prevent="openOrder"
+                        class="flex items-center justify-center px-4 py-2 font-bold text-white bg-green-500 rounded-lg hover:bg-green-700 dark:bg-blue-900 dark:hover:bg-blue-700">
+                    <span class="hidden bg-yellow-500 bg-blue-500 normal"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    <span>Заказ</span>
+                </button>
+                <a class="flex items-center justify-center px-4 py-2 font-bold text-white bg-blue-500 rounded-lg cursor-pointer hover:bg-blue-700 dark:bg-blue-900 dark:hover:bg-blue-700"
+                   href="#">
+                    <span class="hidden bg-yellow-500 bg-blue-500 normal"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                    </svg>
+                    <span class="pl-1">Проверить MAC</span>
+                </a>
+            </a>
+        </div>
+    </div>
     <div v-if="orders.data"
          class="right-0 flex items-center w-full h-10 max-w-xl p-2 mb-2 bg-white border border-gray-200 rounded shadow-sm">
         <svg class="w-5 h-5 text-gray-500 cursor-pointer" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -13,6 +39,7 @@
         <input type="text" v-model="search" name="" id="" placeholder="Логин, модель/полная модель, код заказа"
                class="w-full pl-3 text-sm text-black bg-transparent border-transparent border-none focus:border-transparent focus:outline-none focus:ring-0" />
     </div>
+    <AddOrder ref="addOrder"></AddOrder>
     <table class="w-full">
         <thead>
         <tr>
@@ -168,6 +195,7 @@
 <script>
 import AppLayout from "../../Layouts/AppLayout.vue"
 import Title from "../../Layouts/Elements/Title.vue";
+import AddOrder from "../../components/dialogs/AddOrder.vue";
 import { router, Head } from "@inertiajs/vue3";
 import { TailwindPagination } from 'laravel-vue-pagination';
 import {ref, watch} from "vue";
@@ -179,15 +207,17 @@ import { ChevronDownIcon } from "@heroicons/vue/20/solid"
 export default {
     components: {
         DialogOverlay,
-        AppLayout, Title, Menu, MenuButton, MenuItem, MenuItems, ChevronDownIcon, Head, TailwindPagination
+        AppLayout, Title, Menu, MenuButton, MenuItem, MenuItems, ChevronDownIcon, Head, TailwindPagination, AddOrder
     },
     props: {
         orders: Object
     },
 
-    setup() {
+    setup(props, ctx) {
         const search = ref('');
 
+        const addOrder = ref(null);
+        const changeOrder = ref(null);
 
         const url = route('orders.index');
 
@@ -205,6 +235,10 @@ export default {
             await router.get(url, {page: page.value}, {preserveState: true, preserveScroll: true, only: ['orders']} )
         }
 
+        const openOrder = async () => {
+            await addOrder.value.openModal();
+        };
+
         return {
             search,
             formatDate,
@@ -212,7 +246,9 @@ export default {
             fromNow,
             paginate,
             nicePhone,
-            newStatus
+            newStatus,
+            addOrder,
+            openOrder
         }
     }
 
